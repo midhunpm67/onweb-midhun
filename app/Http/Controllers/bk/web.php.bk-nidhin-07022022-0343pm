@@ -1,0 +1,153 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\userController;
+use App\Http\Controllers\adminController;
+use App\Http\Controllers\loginController;
+
+
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', function () { return view('user.index'); })->name("indexView");
+Route::get('/blog', function () { return view('blog'); })->name("blogView");
+Route::get('/blog-details', function () { return view('blog-details'); })->name("blogDetailsView");
+// Route::get('/register', function () { return view('userReg'); })->name("registerView");
+Route::get('/user-registration', function () { return view('userregistrationView'); })->name("userregistrationView");
+Route::get('/index2', function () { return view('index-2'); })->name("inedx2View");
+
+
+
+// Route::get("/", [userController::class, "indexView"])->name("indexView");
+// Route::get("/user-reg", [userController::class, "userRegistration"])->name("userRegistration");
+
+Route::get("/register", [userController::class, "userRegistration"])->name("registerView");
+Route::post("/user-data", [loginController::class, "registration"]);
+Route::get("/website-list", [adminController::class, "loginView"])->name("website");
+
+Route::get('insert','StudInsertController@insertform');
+
+Route::post("/login-check", [adminController::class, "loginCheck"])->name("login_check");
+
+
+Route::get("/login", [adminController::class, "loginView"])->name("login");
+
+// ...............Admin.....................
+
+Route::prefix('/admin')->middleware('auth')->group(function () {
+
+    Route::get("/dashboard", [adminController::class, "indexView"])->name("indexView");
+    Route::get("/logout", [adminController::class, "logout"])->name("logout");
+
+    Route::get('/', function () { return view('admin.index'); })->name("dashboardView");
+
+    Route::get("/new-layout", [adminController::class, "new_layout"])->name("new_layout");
+
+    Route::post("/template-data", [loginController::class, "templateregistration"]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+    Route::get('/calendar', function () { return view('admin.calendar'); })->name("calendarView");
+    Route::get('/chart-3d', function () { return view('admin.chart_3d'); })->name("chart3dView");
+    Route::get('/chart-chartist', function () { return view('admin.chart_chartist'); })->name("chartchartistView");
+    Route::get('/chart-chartjs', function () { return view('admin.chart_chartjs'); })->name("chartchartjsView");
+    Route::get('/chart-dynamic', function () { return view('admin.chart_dynamic'); })->name("chartdynamicView");
+    Route::get('/chart-flot', function () { return view('admin.chart_flot'); })->name("chartflotView");
+    Route::get('/chart-knob', function () { return view('admin.chart_knob'); })->name("chartknobView");
+    Route::get('/widgets', function () { return view('admin.widgets'); })->name("widgetsView");
+    Route::get('/ui-typography', function () { return view('admin.ui_typography'); })->name("uitypographyView");
+    Route::get('/ui-treeview', function () { return view('admin.ui_treeview'); })->name("uitreeviewView");
+    Route::get('/ui-sweetalert', function () { return view('admin.ui_sweetalert'); })->name("uisweetalertView");
+    Route::get('/ui-rangeslider', function () { return view('admin.ui_rangeslider'); })->name("uirangesliderView");
+    Route::get('/ui-notification', function () { return view('admin.ui_notification'); })->name("uinotificationView");
+    Route::get('/ui-modals', function () { return view('admin.ui_modals'); })->name("uimodalsView");
+    Route::get('/ui-draggablecards', function () { return view('admin.ui_draggablecards'); })->name("uidraggablecardsView");
+    Route::get('/ui-components', function () { return view('admin.ui_components'); })->name("uicomponentsView");
+    Route::get('/ui-checkboxradio', function () { return view('admin.ui_checkboxradio'); })->name("uicheckboxradioView");
+    Route::get('/ui-cards', function () { return view('admin.ui_cards'); })->name("uicardsView");
+    Route::get('/ui-buttons', function () { return view('admin.ui_buttons'); })->name("uibuttonsView");
+    Route::get('/tables-responsive', function () { return view('admin.tables_responsive'); })->name("tablesresponsiveView");
+    Route::get('/tables-editable', function () { return view('admin.tables_editable'); })->name("tableseditableView");
+    Route::get('/read-mail', function () { return view('admin.read_mail'); })->name("readmailView");
+    Route::get('/profile', function () { return view('admin.profile'); })->name("profileView");
+    Route::get('/page-starter', function () { return view('admin.page_starter'); })->name("pagestarterView");
+    Route::get('/page-register', function () { return view('admin.page_register'); })->name("pageregisterView");
+    Route::get('/page-recoverpw', function () { return view('admin.page_recoverpw'); })->name("pagerecoverpwView");
+    Route::get('/page-login', function () { return view('admin.page_login'); })->name("pageloginView");
+    Route::get('/page-lockscreen', function () { return view('admin.page_lockscreen'); })->name("pagelockscreenView");
+    Route::get('/page_confirmmail', function () { return view('admin.page_confirmmail'); })->name("pageconfirmmailView");
+    Route::get('/page500', function () { return view('admin.page500'); })->name("page500View");
+    Route::get('/page404', function () { return view('admin.page404'); })->name("page404View");
+    Route::get('/tables-datatable', function () { return view('admin.tables_datatable'); })->name("tablesdatatableView");
+    Route::get('/tables-basic', function () { return view('admin.tables_basic'); })->name("tablesbasicView");
+    Route::get('/chart-flot', function () { return view('admin.chart-flot'); })->name("chartflotView");
+//    ...................
+    Route::get('/', function () { return view('admin.'); })->name("View");
+    Route::get('/', function () { return view('admin.'); })->name("View");
+    Route::get('/', function () { return view('admin.'); })->name("View");
+    Route::get('/', function () { return view('admin.'); })->name("View");
+    Route::get('/', function () { return view('admin.'); })->name("View");
+    Route::get('/', function () { return view('admin.'); })->name("View");
+    Route::get('/', function () { return view('admin.'); })->name("View");
+    Route::get('/', function () { return view('admin.'); })->name("View");
+    Route::get('/', function () { return view('admin.'); })->name("View");
+    Route::get('/', function () { return view('admin.'); })->name("View");
+    Route::get('/', function () { return view('admin.'); })->name("View");
+    Route::get('/', function () { return view('admin.'); })->name("View");
+    Route::get('/', function () { return view('admin.'); })->name("View");
+    Route::get('/', function () { return view('admin.'); })->name("View");
+    Route::get('/', function () { return view('admin.'); })->name("View");
+    Route::get('/', function () { return view('admin.'); })->name("View");
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

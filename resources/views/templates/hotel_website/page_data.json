@@ -1,0 +1,48 @@
+{
+	"page_title": "Elroyale Restaurant and Cafe",
+	"sliders": [
+		{
+			"title": "Offering The Best Tasting Experience!",
+			"description": "Fresh Ingredient, Tasty Meals, And Creative Chefs",
+			"image": "images/backgrounds/16.jpg",
+			"button_text": "view Menu",
+			"button_link": "/menu-main"
+		}
+	],
+	"about": 
+		{
+			"title": "Welcome To The El Royale",
+			"description": "Delicious Food, Friendly Staff, Cozy Atmosphere & Positive Emotions!",
+			"image": "images/shapes/shape2.png"
+		},
+	"discover": 
+		{
+			"description": "El Royale was the first restaurant to open in Egypt, the resturant designed with the history in mind we have created a soft industrial dining room.",
+			"button_text": "Discover Our Story",
+			"button_link": "/our-story"
+		},
+	"features":
+		[
+			{
+				"title": "Start Eating Better",
+				"image": "images/features/1.jpg"
+			},
+			{
+				"title": "Quality Is The Heart",
+				"image": "images/features/3.jpg"
+			},
+			{
+				"title": "Hot & Ready To Serve",
+				"image": "images/features/2.jpg"
+			}
+		],
+	"ad_1": 
+		{
+			"title": "Pull Up A Chair. Take A Taste & Come Join Us",
+			"sub_title": "We Create Delicious Memories",
+			"description": "We have awesome recipes and the most talented chefs in town!",
+			"image": "images/about/signature2.png",
+			"button_text": "Book A Table",
+			"button_link": "/reservation"
+		}
+}

@@ -1,0 +1,255 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Classes\Referral;
+use Illuminate\Support\Facades\Auth;
+// use App\Models\TemplateInfo;
+use Illuminate\Support\Facades\Route;
+// use App\Classes\Tbc;
+// use Illuminate\Support\Facades\Session;
+// use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+
+class adminController extends Controller
+{
+    function indexView()
+    {
+        if (Auth::check()) {
+            return view("admin.indexView");
+        } else {
+            return view("admin.login");
+        }
+    }
+
+    function loginView()
+    {
+        if (Auth::check()) {
+            return view("admin.indexView");
+        } else {
+            return view("admin.login");
+        }
+    }
+
+    function loginCheck(Request $request)
+    {
+
+        $request->validate([
+            'email' =>  'required|email',
+            'password'  => 'required',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt($credentials)) {
+            return redirect()->intended('dashboard')->withSuccess('Successfully Logged In');
+        }
+
+        return redirect("login")->withSuccess('Credentials are not valid');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return view('admin.login');
+    }
+
+    public function new_layout()
+    {
+
+        return view('admin.new_layout');
+    }
+
+    function createTemplate(Request $request): string
+    {
+
+        $request_data = $request->all();
+
+        $insert_template = 0;
+
+        $insert_template = DB::table("template_info")->insertGetId(
+            [
+                'template_name' => $request_data['template_name'],
+                'template_layout' => $request_data['template_layout'],
+                'slug_url' => $request_data['slug_url'],
+                'cat_id' => 1,
+                'sub_id' => 1,
+                'theme_id' => 1,
+                'is_single_page' => 1,
+                'source_id' => 1,
+                'author_id' => 1,
+            ]
+        );
+
+
+
+        if ($insert_template)
+            return json_encode([
+                "status" => 1,
+                "message" => "Success!",
+                "redirect" => "/website-list"
+            ]);
+        else
+            return json_encode([
+                "status" => 0,
+                "message" => "Something went wrong!"
+            ]);
+    }
+    public function new_website()
+    {
+
+        return view('admin.new_website');
+    }
+
+    function createWebsite(Request $request): string
+    {
+
+        $request_data = $request->all();
+
+        $insert_website = 0;
+
+        $insert_website = DB::table("user_websites")->insertGetId(
+            [
+                'website_name' => $request_data['website_name'],
+                'web_content' => $request_data['web_content'],
+                'slug_url' => $request_data['slug_url'],
+                'theme_id' => 1,
+                'user_id' => 1,
+                'theme_id' => 1,
+                'is_subdomain' => 1,
+                'suspended' => 1,
+
+            ]
+        );
+        if ($insert_website)
+            return json_encode([
+                "status" => 1,
+                "message" => "Success!",
+                "redirect" => "/website-list"
+            ]);
+        else
+            return json_encode([
+                "status" => 0,
+                "message" => "Something went wrong!"
+            ]);
+    }
+
+    public function new_category()
+    {
+
+        return view('admin.new_category');
+    }
+
+    function createCategory(Request $request): string
+    {
+
+        $request_data = $request->all();
+
+        $insert_catagory = 0;
+
+        $insert_catagory = DB::table("theme_cat")->insertGetId(
+            [
+                'name' => $request_data['name'],
+            ]
+        );
+        if ($insert_catagory)
+            return json_encode([
+                "status" => 1,
+                "message" => "Success!",
+                "redirect" => "/website-list"
+            ]);
+        else
+            return json_encode([
+                "status" => 0,
+                "message" => "Something went wrong!"
+            ]);
+    }
+    public function new_subcategory()
+    {
+
+        return view('admin.new_subcategory');
+    }
+    function create_sub_category(Request $request): string
+    {
+
+        $request_data = $request->all();
+
+        $insert_category = 0;
+
+        $insert_category = DB::table("theme_sub")->insertGetId(
+            [
+                'name' => $request_data['name'],
+                'cat_id' => 1,
+            ]
+        );
+        if ($insert_category)
+            return json_encode([
+                "status" => 1,
+                "message" => "Success!",
+                "redirect" => "/website-list"
+            ]);
+        else
+            return json_encode([
+                "status" => 0,
+                "message" => "Somthing went wrong!"
+            ]);
+    }
+
+    function website_listing()
+    {
+        // $userId = Auth::id();
+
+        $page_title = "Website Listing";
+        $page_name = "website_listing";
+
+        $db_data = DB::table("user_websites")
+        ->select("id", "website_name", "slug_url", "web_content")
+        ->orderBy("id", "ASC")
+        ->get();
+        
+        $list_data = [];
+
+        print_r($db_data); exit;
+
+        foreach ($db_data as $val) {
+            if ($val->credit_id == "")
+                continue;
+
+            $credit_id = strtolower($val->credit_id);
+            $user_code = $val->user_code;
+            $name = $val->full_name;
+            $payable_amount = $val->payable_amount ?? 0.00;
+            $paid_amount = $val->paid_amount ?? 0.00;
+            $deadline = $val->deadline;
+
+            $list_data_temp = [
+                "icon" => "",
+                "title" => "$name",
+                "link" => "/merchant/credits/$user_code",
+                "subtitle_1" => "Payable: $payable_amount",
+                "subtitle_2" => "Paid: $paid_amount",
+                "subtitle_3" => "",
+                "sub_text_1" => "$deadline",
+                "sub_text_2" => ""
+            ];
+
+            array_push($list_data, $list_data_temp);
+        }
+
+        $page_data = [
+            "title" => "",
+            "button" => [
+                "icon" => "",
+                "link" => ""
+            ],
+            "faq" => "merchant_list_faq",
+            "no_data" => "Sorry... Merchant List Empty! 🤷‍♂️",
+            "list" => $list_data
+        ];
+
+        return view("common_list_view", compact("page_title", "page_name", "page_data"));
+        return view('admin.website_listing');
+    }
+}

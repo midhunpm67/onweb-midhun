@@ -1,0 +1,48 @@
+{
+	"page_title": "Page_Title",
+	"sliders": [
+		{
+			"title": "Title",
+			"description": "Description",
+			"image": "Image",
+			"button_text": "Button Text",
+			"button_link": "Button Link"
+		}
+	],
+	"about": 
+		{
+			"title": "Title",
+			"description": "Description",
+			"image": "Image"
+		},
+	"discover": 
+		{
+			"description": "Description",
+			"button_text": "Button Text",
+			"button_link": "Button Link"
+		},
+	"features":
+		[
+			{
+				"title": "Title",
+				"image": "Image"
+			},
+			{
+				"title": "Title",
+				"image": "Image"
+			},
+			{
+				"title": "Title",
+				"image": "Image"
+			}
+		],
+	"ad_1": 
+		{
+			"title": "Title",
+			"sub_title": "Sub Title",
+			"description": "Description",
+			"image": "Image",
+			"button_text": "Button Text",
+			"button_link": "Button Link"
+		}
+}

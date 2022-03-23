@@ -1,0 +1,44 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Classes\Referral;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+// use App\Classes\Tbc;
+// use Illuminate\Support\Facades\Session;
+// use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+use App\Models\template_page;
+
+
+class userController extends Controller
+{
+    function indexView()
+    {
+        return view("user.indexView");
+    }
+
+    function userReg()
+    {
+        return view("user.user-registration");
+    }
+
+    function userDemoView()
+    {
+        dd('hi');
+        // $data= PageContent::select('content')->get()->first();
+
+        $table_data =template_page::get();
+
+        dd($table_data);
+
+        // return view("demo.demo_page")->with('data', $data['content'])->render();
+
+        // return view("demo.demo_page");
+    }
+
+}
