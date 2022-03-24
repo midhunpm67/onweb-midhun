@@ -2,6 +2,8 @@
 
 
 @section('page_data')
+
+
 <div id="wrapper">
 	<div class="main-content">
 		<div class="row small-spacing">
@@ -22,10 +24,8 @@
 						<div class="col-md-12">
 							<div class="padding-20">
 								<h5><b>category Name</b></h5>
-								<input type="text" class="form-control" maxlength="25" name="name" id="name" />
-
-								
-							
+								<input type="text" class="form-control" maxlength="25" name="name" id="name" value="" />
+								<input type="hidden" name="id" id="id" value="">
 							</div>
 						</div>
 					

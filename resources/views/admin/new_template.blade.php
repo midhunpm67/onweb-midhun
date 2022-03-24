@@ -42,11 +42,9 @@
 						<div class="col-md-6">
 							<div class="padding-20">
 								<h5><b>Sub Category</b></h5>
-								<select class="form-control select-picker valid" onchange="Template(this);" data-validation="required" data-validation-error-msg="Choose a subcategory" id="subcategory" name="subcategory">
+								<select class="form-control select-picker valid" onchange="Template(this);" data-validation="required" data-validation-error-msg="Choose a subcategory" id="subcategory" name="subcategory" >
 								    <option value="0">Select Sub Category</option>
-									@foreach($subcategory as $scat)
-									<option value="{{ $scat->id }}">{{ $scat->name }}</option>
-									@endforeach
+									
 								</select>
                                
 							</div>
@@ -55,7 +53,7 @@
 							<div class="padding-20">
 								<h5><b>Template</b></h5>
 								<select class="form-control select-picker valid" data-validation="required" data-validation-error-msg="Choose a tempate" id="template" name="template">
-								   
+								<option value="0">Select Sub Category</option>
 								</select>
                                
 							</div>
@@ -74,7 +72,7 @@
                         <div class="col-md-6">
 							<div class="padding-20">
                        
-                        <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light">SUBMIT</button> 
+                        <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light save-btn">SUBMIT</button> 
                     
                     </div>
                         </div>
@@ -90,10 +88,7 @@
 		<!-- /.row small-spacing -->		
 		<footer class="footer">
 			<ul class="list-inline">
-				<li>2016 © NinjaAdmin.</li>
-				<li><a href="#">Privacy</a></li>
-				<li><a href="#">Terms</a></li>
-				<li><a href="#">Help</a></li>
+			
 			</ul>
 		</footer>
 	</div>
@@ -128,5 +123,27 @@
 				$("#template").html(result);
 			}});
 	}
+	// $(document).on('click', '.save-btn', function() {
+	// 	      alert('template');
+    //             var Category = document.getElementById('category').value;
+	// 			var subCat = document.getElementById('subCat').value;
+	// 			var template = document.getElementById('template').value;
+		
+    //             if (id) {
+    //                 $.ajax({
+    //                     type: 'GET',
+    //                     url: "{{ route('category-delete') }}",
+    //                     data: {
+    //                         'id': id,
+    //                         '_token': $('meta[name="csrf-token"]').attr('content')
+    //                     },
+    //                     success: function(response) {
+	// 						swal("Deleted!", "", "");
+	// 						location.reload();
+    //                     }
+    //                 });
+    //             }
+
+    //         });
 </script>
 @endsection

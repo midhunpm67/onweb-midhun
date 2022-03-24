@@ -295,18 +295,42 @@
 
 </body>
 <script>
-	$(document).ready(function(){
-		$('.delete-btn').click(function(){
-			var id = $(this).val();
-			$.ajax({
-				url: '{{route("website-delete")}}',
-				method: 'GET',
-				data:id,
-				success: function(){
+	$(document).on('click', '.delete-btn-web', function() {
+                var id = $(this).val();
+                if (id) {
+                    $.ajax({
+                        type: 'GET',
+                        url: "{{ route('website-delete') }}",
+                        data: {
+                            'id': id,
+                            '_token': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+							swal("Deleted!", "", "");
+							location.reload();
+                        }
+                    });
+                }
 
-				}
-			});
-          });
-	});
+            });
+
+			$(document).on('click', '.delete-btn-category', function() {
+                var id = $(this).val();
+                if (id) {
+                    $.ajax({
+                        type: 'GET',
+                        url: "{{ route('category-delete') }}",
+                        data: {
+                            'id': id,
+                            '_token': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+							swal("Deleted!", "", "");
+							location.reload();
+                        }
+                    });
+                }
+
+            });
 </script>
 </html>

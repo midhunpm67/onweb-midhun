@@ -120,7 +120,16 @@ class userController extends Controller
     }
     public function deleteWebsite(Request $request)
     {
-       
+       return DB::table('user_websites')->delete($request->id);
+    }
+    public function categoryEdit(Request $request)
+    {
+       $data = DB::table('theme_cat')->select('*')->where('id',$request->id)->first();
+       return redirect('admin/add/category',$data);
+    }
+    public function deleteCategory(Request $request)
+    {
+        return DB::table('theme_cat')->delete($request->id);
     }
 
 }

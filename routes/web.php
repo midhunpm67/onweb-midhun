@@ -38,7 +38,10 @@ Route::get('/index2', function () { return view('index-2'); })->name("index2View
 // Route::get("/user-reg", [userController::class, "userRegistration"])->name("userRegistration");
 
 Route::get("/register", [userController::class, "userReg"])->name("registerView");
+
 Route::get("/website-delete", [userController::class, "deleteWebsite"])->name("website-delete");
+Route::get("/category-delete", [userController::class, "deleteCategory"])->name("category-delete");
+
 
 Route::post("/user-data", [loginController::class, "registration"])->name("new_user");
 // Route::get("/website-list", [adminController::class, "loginView"])->name("website");
@@ -46,7 +49,7 @@ Route::post("/user-data", [loginController::class, "registration"])->name("new_u
 Route::get('insert','StudInsertController@insertform');
 
 Route::post("/login-check", [adminController::class, "loginCheck"])->name("login_check");
-
+Route::get("/category-edit", [userController::class, "categoryEdit"])->name("category-edit");
 
 Route::get("/login", [adminController::class, "loginView"])->name("login");
 
@@ -70,6 +73,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/', function () { return view('admin.index'); })->name("dashboardView");
 
 
+    Route::get("/category-edit", [userController::class, "categoryEdit"])->name("category-edit");
 
     Route::get("/add/layout", [adminController::class, "new_layout"])->name("new_layout");
     Route::get("/add/template", [adminController::class, "new_template"])->name("new_template");
