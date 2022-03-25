@@ -54,6 +54,7 @@ Route::get("/category-edit", [userController::class, "categoryEdit"])->name("cat
 Route::get("/login", [adminController::class, "loginView"])->name("login");
 
 Route::post("/create/template-data", [adminController::class, "createTemplate"])->name("createTemplate");
+Route::post("/create/page-data", [adminController::class, "createPage"])->name("createPage");
 Route::post("/create/templatepage-data", [adminController::class, "createTemplatePage"])->name("createTemplatePage");
 Route::post("/create/website-data", [adminController::class, "createWebsite"])->name("createWebsite");
 Route::post("/config/website-data", [adminController::class, "configWebsite"])->name("configWebsite");
@@ -78,6 +79,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get("/add/layout", [adminController::class, "new_layout"])->name("new_layout");
     Route::get("/add/template", [adminController::class, "new_template"])->name("new_template");
 	Route::get("/add/website", [adminController::class, "new_website"])->name("new_website");
+    Route::get("/add/new-page/{id}", [adminController::class, "new_page"])->name("new_page");
 	Route::get("/config/website/{web_id}/{page_name?}", [adminController::class, "config_website"])->name("config_website");
     Route::get("/add/category", [adminController::class, "new_category"])->name("new_category");
     Route::get("/add/subcategory", [adminController::class, "new_subcategory"])->name("new_subcategory");

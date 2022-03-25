@@ -125,7 +125,7 @@ class userController extends Controller
     public function categoryEdit(Request $request)
     {
        $data = DB::table('theme_cat')->select('*')->where('id',$request->id)->first();
-       return redirect('admin/add/category',$data);
+        return redirect('admin/add/category',$data);
     }
     public function deleteCategory(Request $request)
     {

@@ -21,7 +21,49 @@
 	<title>Admin | OnWeb </title>
 	
    
-	@include("layouts.admin_header")
+	<!-- @include("layouts.admin_header") -->
+
+	<!-- Main Styles -->
+	<link rel="stylesheet" href="http://127.0.0.1:8000/admin/assets/styles/style.min.css">
+
+	<!-- Material Design Icon -->
+	<link rel="stylesheet" href="http://127.0.0.1:8000/admin/assets/fonts/material-design/css/materialdesignicons.css">
+
+	<!-- mCustomScrollbar -->
+	<link rel="stylesheet" href="http://127.0.0.1:8000/admin/assets/plugin/mCustomScrollbar/jquery.mCustomScrollbar.min.css">
+
+	<!-- Waves Effect -->
+	<link rel="stylesheet" href="http://127.0.0.1:8000/admin/assets/plugin/waves/waves.min.css">
+
+	<!-- Sweet Alert -->
+	<link rel="stylesheet" href="http://127.0.0.1:8000/admin/assets/plugin/sweet-alert/sweetalert.css">
+
+	<!-- FlexDatalist -->
+	<link rel="stylesheet" href="http://127.0.0.1:8000/admin/assets/plugin/flexdatalist/jquery.flexdatalist.min.css">
+
+	<!-- Popover -->
+	<link rel="stylesheet" href="http://127.0.0.1:8000/admin/assets/plugin/popover/jquery.popSelect.min.css">
+
+	<!-- Select2 -->
+	<link rel="stylesheet" href="http://127.0.0.1:8000/admin/assets/plugin/select2/css/select2.min.css">
+
+	<!-- Timepicker -->
+	<link rel="stylesheet" href="http://127.0.0.1:8000/admin/assets/plugin/timepicker/bootstrap-timepicker.min.css">
+
+	<!-- Touch Spin -->
+	<link rel="stylesheet" href="http://127.0.0.1:8000/admin/assets/plugin/touchspin/jquery.bootstrap-touchspin.min.css">
+
+	<!-- Colorpicker -->
+	<link rel="stylesheet" href="http://127.0.0.1:8000/admin/assets/plugin/colorpicker/css/bootstrap-colorpicker.min.css">
+
+	<!-- Datepicker -->
+	<link rel="stylesheet" href="http://127.0.0.1:8000/admin/assets/plugin/datepicker/css/bootstrap-datepicker.min.css">
+
+	<!-- DateRangepicker -->
+	<link rel="stylesheet" href="http://127.0.0.1:8000/admin/assets/plugin/daterangepicker/daterangepicker.css">
+
+	<!-- Dark Themes -->
+	<link rel="stylesheet" href="http://127.0.0.1:8000/admin/assets/styles/style-dark.min.css">
 	
 </head>
 

@@ -177,36 +177,32 @@ class adminController extends Controller
 	}
 	
 	//jk
-    function createWebsite(Request $request): string
+    function createWebsite(Request $request)
     {
-        dd($request);
         $request_data = $request->all();
 
         $insert_website = 0;
 
-        $insert_website = DB::table("user_websites")->insertGetId(
+        $insert_website = DB::table("template_info")->insertGetId(
             [
-                'website_name' => $request_data['website_name'],
-                // 'web_content' => $request_data['web_content'],
-                'slug_url' => $request_data['website_name_slug'],
-                'theme_id' => $request_data['theme_id'],
-                'user_id' => Auth::id(),
-                'is_subdomain' => 0,
+                'template_name' => $request_data['template_name'],
+                'slug_url' => $request_data['slug_url'],
+                'cat_id' => $request_data['category'],
+                'sub_id' => $request_data['subcategory'],
+                'author_id' => Auth::user()->id,
+                'active'=>1
 
             ]
         );
 
         if ($insert_website)
-            return json_encode([
-                "status" => 1,
-                "message" => "Success!",
-                "redirect" => '/admin/config/website/$insert_website'
-            ]);
+        {
+            return back()->with('success','successfully added');
+        }
         else
-            return json_encode([
-                "status" => 0,
-                "message" => "Something went wrong!"
-            ]);
+       {
+        return back()->with('error','Error...!');
+       }
     }
 
     function configWebsite(Request $request): string
@@ -260,16 +256,9 @@ class adminController extends Controller
             ]
         );
         if ($insert_catagory)
-            return json_encode([
-                "status" => 1,
-                "message" => "Success!",
-                "redirect" => "/website-list"
-            ]);
-        else
-            return json_encode([
-                "status" => 0,
-                "message" => "Something went wrong!"
-            ]);
+           {
+               return redirect('admin/list/categories');
+           }
     }
 
     public function new_subcategory()
@@ -292,21 +281,13 @@ class adminController extends Controller
             ]
         );
         if ($insert_category)
-            return json_encode([
-                "status" => 1,
-                "message" => "Success!",
-                "redirect" => "/website-list"
-            ]);
-        else
-            return json_encode([
-                "status" => 0,
-                "message" => "Somthing went wrong!"
-            ]);
+            {
+                return redirect('/admin/list/subcategories');
+            }
     }
 
     public function new_templatepage()
     {
-
         return view('admin.new_templatepage');
     }
 
@@ -459,7 +440,7 @@ class adminController extends Controller
                 "Sl. No." => "$loop_counter",
                 "Template Name" => "$template_name",
                 "Slug Url" =>"$slug_url",
-                "Actions" => "<a href='/admin/list/template-pages/1'>View Pages</a><br/><a href='/template/$slug_url' target='_blank'>View Template</a><br/><a href='/create/template/$slug_url' target='_blank'>Use Template</a>",
+                "Actions" => "<a href='/admin/list/template-pages/$id'>View Pages</a><br/><a href='/template/$slug_url' target='_blank'>View Template</a><br/><a href='/create/template/$slug_url' target='_blank'>Use Template</a>",
             ];
 
             array_push($list_data, $list_data_temp);
@@ -496,17 +477,16 @@ class adminController extends Controller
 
 		$page_title = "templatepages_listing";
 		$page_name = "templatepages_listing";
-        $add_url = "";
+        $add_url = route('new_page',$id);
 
 		$db_data = DB::table("template_pages AS tp")
 		->select("tp.id", "tp.page_name", "tp.slug_url AS page_slug", "tp.page_type", "template_name", "ti.id", "ti.template_name", "ti.slug_url AS template_slug")
 		->leftJoin('template_info AS ti', function ($join) {
 			$join->on('ti.id', '=', 'tp.temp_id');
 		})
-		->where("tp.id", $id)
+		->where("tp.temp_id", $id)
 			->orderBy("tp.id", "ASC")
 			->get();
-
 		$list_data = [];
 		$loop_counter = 0;
 		// print_r($db_data); exit;
@@ -528,7 +508,6 @@ class adminController extends Controller
 				"Sl. No." => "$loop_counter",
 				"page_name" => "$page_name",
 				"slug_url" => "$page_slug",
-				"page_type" => "$page_type",
 				// "page_layout" => "$page_layout",
 				"Actions" => "<a href='/template/$template_slug/$page_slug' target='_blank'>View Page</a>",
 
@@ -542,7 +521,6 @@ class adminController extends Controller
 			"Sl. No.",
 			"Template Name",
 			"Slug Url",
-			"Page Type",
 			// "Page Layout",
 
 		];
@@ -680,5 +658,35 @@ class adminController extends Controller
         ];
 
         return view("admin.common_list_view", compact("page_title", "page_name", "page_data","add_url"));
+    }
+    public function new_page($id)
+    {
+        return view('admin.new_page',compact('id'));
+    }
+    public function createPage(Request $request)
+    {
+
+        $request->validate([
+            'page_name'=>'required',
+            'slug_url'=>'required'
+        ]);
+        $request_data = $request->all();
+        $insert_page = DB::table("template_pages")->insertGetId(
+            [
+                'page_name' => $request_data['page_name'],
+                'slug_url' => $request_data['slug_url'],
+                'temp_id' => $request_data['id'],
+                'page_type' => 1
+            ]
+        );
+
+        if ($insert_page)
+        {
+            return back()->with('success','successfully added');
+        }
+        else
+       {
+        return back()->with('error','Error...!');
+       }
     }
 }

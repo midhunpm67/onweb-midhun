@@ -26,14 +26,14 @@
                                 @endif
                             </div>
 					<!-- /.dropdown js__dropdown -->
-                    <form class="reply-form" id="websiteRegForm" method="POST" action="/create/website-data">
+                    <form class="reply-form" id="websiteRegForm" method="POST" action="/create/page-data">
 						@csrf
 					<div class="row">
                         
 						<div class="col-md-6">
 							<div class="padding-20">
-								<h5><b>Template Name</b></h5>
-								<input type="text" class="form-control" maxlength="25" name="template_name" id="template_name" />
+								<h5><b>Page Name</b></h5>
+								<input type="text" class="form-control" maxlength="25" name="page_name" id="page_name" />
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -42,30 +42,10 @@
 								<input type="text" class="form-control" maxlength="25" name="slug_url" id="slug_url" />
 							</div>
 						</div>
-						<div class="col-md-6">
-							<div class="padding-20">
-								<h5><b>Category</b></h5>
-								<!--<input type="text" class="form-control" maxlength="25" name="slug_url" id="slug_url" />-->
-								<select class="form-control select-picker valid" onchange="subCate(this);" data-validation="required" data-validation-error-msg="Choose a category" id="category" name="category">
-								    <option value="0">Select Category</option>
-									@foreach($category as $cat)
-									<option value="{{ $cat->id }}">{{ $cat->name }}</option>
-									@endforeach
-								</select>
-							</div>
-						</div>
-						<div class="col-md-6">
-							<div class="padding-20">
-								<h5><b>Sub Category</b></h5>
-								<select class="form-control select-picker valid" onchange="Template(this);" data-validation="required" data-validation-error-msg="Choose a subcategory" id="subcategory" name="subcategory" >
-								    <option value="0">Select Sub Category</option>
-								</select>
-							</div>
-						</div>
                         <div class="col-md-6">
 							<div class="padding-20">
-                       
-                        <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light save-btn">SUBMIT</button> 
+                            <input type="hidden" name="id" id="id" value="{{$id}}">
+                        <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light save-btn">ADD</button> 
                     
                     </div>
                         </div>
