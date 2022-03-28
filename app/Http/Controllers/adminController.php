@@ -74,14 +74,10 @@ class adminController extends Controller
         $insert_template = DB::table("template_info")->insertGetId(
             [
                 'template_name' => $request_data['template_name'],
-                'template_layout' => $request_data['template_layout'],
+//                'template_layout' => $request_data['template_layout'],
                 'slug_url' => $request_data['slug_url'],
-                'cat_id' => $request_data['cat_id'],
-                'sub_id' => $request_data['sub_id'],
-                'theme_id' => 1,
-                'is_single_page' => 1,
-                'source_id' => 1,
-                'author_id' => 1,
+                'cat_id' => $request_data['category'],
+                'sub_id' => $request_data['subcategory'],
             ]
         );
 
@@ -183,13 +179,12 @@ class adminController extends Controller
 
         $insert_website = 0;
 
-        $insert_website = DB::table("template_info")->insertGetId(
+        $insert_website = DB::table("user_websites")->insertGetId(
             [
-                'template_name' => $request_data['template_name'],
-                'slug_url' => $request_data['slug_url'],
-                'cat_id' => $request_data['category'],
-                'sub_id' => $request_data['subcategory'],
-                'author_id' => Auth::user()->id,
+                'website_name' => $request_data['website_name'],
+                'slug_url' => $request_data['website_name_slug'],
+                'theme_id' => $request_data['theme_id'],
+                'user_id' => Auth::user()->id,
                 'active'=>1
 
             ]
@@ -369,10 +364,13 @@ class adminController extends Controller
                 "Sl. No." => "$loop_counter",
                 "Website Name" => "$website_name",
                 "Slug Url" =>"$slug_url",
-                "Actions" => "<button class='btn btn-sm' value='$id'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-eye' viewBox='0 0 16 16'>
+                "Actions" => "<a href='/admin/template/personal/".$id."' class='btn btn-sm' value='$id'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-eye' viewBox='0 0 16 16'>
                 <path d='M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z'/>
                 <path d='M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z'/>
-                </svg></button>
+                </svg></a>
+                <a href='/admin/template/edit/personal/".$id."' class='btn btn-sm' value='$id'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil-fill' viewBox='0 0 16 16'>
+  <path d='M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z'/>
+</svg></a>
                 <button class='btn btn-sm delete-btn-web' value='$id'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-trash' viewBox='0 0 16 16'>
                 <path d='M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z'/>
                 <path fill-rule='evenodd' d='M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z'/>
@@ -393,8 +391,8 @@ class adminController extends Controller
         $page_data = [
             "title" => "$page_title",
             "button" => [
-                "icon" => "",
-                "link" => ""
+                "name" => "Add",
+                "link" => "/admin/add/website"
             ],
             "no_data" => "Sorry... Website List Empty! 🤷‍♂️",
             "list_title" => $list_title,
@@ -543,7 +541,7 @@ class adminController extends Controller
     {
         // $userId = Auth::id();
 
-        $page_title = "Template Listing";
+        $page_title = "Category Listing";
         $page_name = "category_listing";
         $add_url = route('new_category');
 
@@ -607,7 +605,7 @@ class adminController extends Controller
     {
         // $userId = Auth::id();
 
-        $page_title = "subcategory_listing";
+        $page_title = "Subcategory Listing";
         $page_name = "subcategory_listing";
         $add_url = route('new_subcategory');
 
@@ -688,5 +686,77 @@ class adminController extends Controller
        {
         return back()->with('error','Error...!');
        }
+    }
+
+    public function demoPersonalWebsite($id){
+        $data = DB::table('template_info')->where('id', '=', $id)->first();
+        return view('templates.profile_website.profile');
+    }
+
+    public function personalWebsite($id){
+        $websiteData    = DB::table('user_websites')->where('id', '=', $id)->first();
+        $templateData   = DB::table('template_info')->where('id', '=', $websiteData->theme_id)->first();
+        return view($templateData->slug_url);
+    }
+
+    public function editPersonalWebsite($id){
+        $websiteData    = DB::table('profile_website_template')->where('user_id', '=', Auth::id())->where('user_web_id', '=', $id)->first();
+        return view('templates.profile_website.edit_page',compact('websiteData','id'));
+    }
+
+    public function insertPersonalWebsite(Request $request){
+        $request->validate([
+            'title' =>  'required',
+            'name' =>  'required',
+            'designation' =>  'required',
+            'about' =>  'required',
+            'link_1' =>  'required',
+            'link_2' =>  'required',
+        ]);
+
+        $request_data = $request->all();
+
+        $insert_page = DB::table("profile_website_template")->insertGetId(
+            [
+                'title' => $request_data['title'],
+                'name' => $request_data['name'],
+                'designation' => $request_data['designation'],
+                'about' => $request_data['about'],
+                'link_1' => $request_data['link_1'],
+                'link_2' => $request_data['link_2'],
+                'user_id' => Auth::id(),
+                'user_web_id' => $request_data['web_id'],
+            ]
+        );
+
+        $websiteData    = DB::table('profile_website_template')->where('user_id', '=', Auth::id())->first();
+//        return view('templates.profile_website.edit_page',compact('websiteData'));
+        return redirect()->back();
+    }
+
+    public function updatePersonalWebsite(Request $request){
+        $request->validate([
+            'title' =>  'required',
+            'name' =>  'required',
+            'designation' =>  'required',
+            'about' =>  'required',
+            'link_1' =>  'required',
+            'link_2' =>  'required',
+        ]);
+
+        $request_data = $request->all();
+
+        DB::table('profile_website_template')
+            ->where('id', $request_data['id'])
+            ->update([
+                'title' => $request_data['title'],
+                'name' => $request_data['name'],
+                'designation' => $request_data['designation'],
+                'about' => $request_data['about'],
+                'link_1' => $request_data['link_1'],
+                'link_2' => $request_data['link_2'],
+                'user_id' => Auth::id(),
+            ]);
+        return redirect()->back();
     }
 }

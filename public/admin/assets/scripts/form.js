@@ -140,8 +140,9 @@ jQuery(function ($) {
                 data: formData,
                 method: submitType,
                 success: function (response) {
-                    response = JSON.parse(response);
-                    cyberfort[successFunction](response, form);
+                    window.location.reload();
+                    // response = JSON.parse(response);
+                    // cyberfort[successFunction](response, form);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     var responseText = jQuery.parseJSON(jqXHR.responseText);

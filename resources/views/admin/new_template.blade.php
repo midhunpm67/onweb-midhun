@@ -26,7 +26,7 @@
                                 @endif
                             </div>
 					<!-- /.dropdown js__dropdown -->
-                    <form class="reply-form" id="websiteRegForm" method="POST" action="/create/website-data">
+                    <form class="reply-form" id="websiteRegForm" method="POST" action="{{route('createTemplate')}}">
 						@csrf
 					<div class="row">
                         
@@ -65,7 +65,7 @@
                         <div class="col-md-6">
 							<div class="padding-20">
                        
-                        <button type="submit" class="btn btn-primary btn-sm waves-effect waves-light save-btn">SUBMIT</button> 
+                        <button type="submit" class="btn btn-primary btn-sm">SUBMIT</button>
                     
                     </div>
                         </div>

@@ -5,7 +5,6 @@
 <div id="wrapper">
 	<div class="main-content">
 
-			@if(count($page_data["list"]))
 
 
 
@@ -22,7 +21,10 @@
 <a href="{!! $add_url !!}" class="btn btn-primary btn-sm waves-effect waves-light">Add</a><br><br>
 @endif
 
-			<table id="example" class="table table-striped table-bordered display" style="width:100%">
+						@if(count($page_data["list"]))
+
+
+						<table id="example" class="table table-striped table-bordered display" style="width:100%">
 							<thead>
 								<tr>
 									@foreach($page_data["list_title"] as $title_val)

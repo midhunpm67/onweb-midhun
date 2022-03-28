@@ -46,7 +46,7 @@ Route::get("/category-delete", [userController::class, "deleteCategory"])->name(
 Route::post("/user-data", [loginController::class, "registration"])->name("new_user");
 // Route::get("/website-list", [adminController::class, "loginView"])->name("website");
 
-Route::get('insert','StudInsertController@insertform');
+//Route::get('insert','StudInsertController@insertform');
 
 Route::post("/login-check", [adminController::class, "loginCheck"])->name("login_check");
 Route::get("/category-edit", [userController::class, "categoryEdit"])->name("category-edit");
@@ -64,6 +64,7 @@ Route::post("/create/subcategory-data", [adminController::class, "create_sub_cat
 
 
 Route::post("/template/{template_name}/{page_name?}", [adminController::class, "view_template"]);
+Route::post("/w/{id}/{slug}", [adminController::class, "view_template"]);
 
 
 Route::prefix('/admin')->middleware('auth')->group(function () {
@@ -97,6 +98,13 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
 
 
+
+    //Personal Portfolio
+        Route::get('/demo/personal/{id}', [adminController::class, "demoPersonalWebsite"])->name("personal_website_demo");
+        Route::get('/template/personal/{id}', [adminController::class, "personalWebsite"])->name("personal_website");
+        Route::get('/template/edit/personal/{id}', [adminController::class, "editPersonalWebsite"])->name("personal_website.edit");
+        Route::post('/template/insert/personal', [adminController::class, "insertPersonalWebsite"])->name("personal_website.insert");
+        Route::post('/template/update/personal', [adminController::class, "updatePersonalWebsite"])->name("personal_website.update");
 
 
 
