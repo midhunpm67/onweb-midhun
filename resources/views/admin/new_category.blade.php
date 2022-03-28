@@ -15,7 +15,18 @@
 				<div class="box-content">
 					<h4 class="box-title">Category information</h4>
 					<!-- /.box-title -->
-				
+					<div class="row">
+					@if (session('success'))
+						<div class="alert alert-success text-center fw-bolder">
+							<p>{{ session('success') }}</p>
+						</div>
+					@endif
+					@if (session('error'))
+						<div class="alert alert-danger text-center fw-bolder">
+							<p>{{ session('error') }}</p>
+						</div>
+					@endif
+           			 </div>
 					<!-- /.dropdown js__dropdown -->
                     <form class="reply-form" id="categoryRegForm" method="POST" action="/create/category-data">
 						@csrf

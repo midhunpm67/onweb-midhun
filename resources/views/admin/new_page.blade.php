@@ -24,7 +24,7 @@
                                         <p>{{ session('error') }}</p>
                                     </div>
                                 @endif
-                            </div>
+                    </div>
 					<!-- /.dropdown js__dropdown -->
                     <form class="reply-form" id="websiteRegForm" method="POST" action="/create/page-data">
 						@csrf

@@ -95,6 +95,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/list/template-pages/{id}', [adminController::class, "templatepages_listing"])->name("templatepages_listing");
 
 	Route::get('/create/website/{template_name}', [adminController::class, "create_website"])->name("create_website");
+    Route::get('/template/delete/{id}', [adminController::class, "deleteTemplate"])->name("delete-template");
 
 
 
@@ -108,9 +109,13 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
 
 
+    //edit category
+    Route::get('/category/edit/{id}', [adminController::class, "editCategory"])->name("category.edit");
+    Route::post('/category/edit', [adminController::class, "updateCategory"])->name("category.update");
 
-
-
+    Route::get('/sub-category/edit/{id}', [adminController::class, "editSubCategory"])->name("sub-category.edit");
+    Route::post('/update/subcategory-data', [adminController::class, "updateSubCategory"])->name("SubCategory.update");
+    Route::get("/sub-category-delete", [adminController::class, "deleteSubCategory"])->name("sub-category-delete");
 
 
 

@@ -374,5 +374,25 @@
                 }
 
             });
+
+
+			$(document).on('click', '.delete-btn-sub-category', function() {
+                var id = $(this).val();
+                if (id) {
+                    $.ajax({
+                        type: 'GET',
+                        url: "{{ route('sub-category-delete') }}",
+                        data: {
+                            'id': id,
+                            '_token': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+							swal("Deleted!", "", "");
+							location.reload();
+                        }
+                    });
+                }
+
+            });
 </script>
 </html>

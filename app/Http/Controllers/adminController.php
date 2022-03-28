@@ -238,7 +238,7 @@ class adminController extends Controller
         return view('admin.new_category');
     }
 
-    function createCategory(Request $request): string
+    function createCategory(Request $request)
     {
 
         $request_data = $request->all();
@@ -252,7 +252,7 @@ class adminController extends Controller
         );
         if ($insert_catagory)
            {
-               return redirect('admin/list/categories');
+               return redirect()->back()->with('success','New category added');
            }
     }
 
@@ -277,7 +277,7 @@ class adminController extends Controller
         );
         if ($insert_category)
             {
-                return redirect('/admin/list/subcategories');
+                return redirect()->back()->with('success','New category added');
             }
     }
 
@@ -438,7 +438,7 @@ class adminController extends Controller
                 "Sl. No." => "$loop_counter",
                 "Template Name" => "$template_name",
                 "Slug Url" =>"$slug_url",
-                "Actions" => "<a href='/admin/list/template-pages/$id'>View Pages</a><br/><a href='/template/$slug_url' target='_blank'>View Template</a><br/><a href='/create/template/$slug_url' target='_blank'>Use Template</a>",
+                "Actions" => "<a href='/admin/list/template-pages/$id'>View Pages</a><br/><a href='/template/$slug_url' target='_blank'>View Template</a><br/><a href='/admin/template/delete/$id' target='_blank'>Delete</a>",
             ];
 
             array_push($list_data, $list_data_temp);
@@ -558,7 +558,6 @@ class adminController extends Controller
             // if ($val->credit_id == "")
             //     continue;
             $loop_counter++;
-
             $id = $val->id;
             $name = $val->name;
             $url =route('category-edit',['id' => $id]);
@@ -567,7 +566,7 @@ class adminController extends Controller
                 "id" => "$id",
                 "Sl. No." => "$loop_counter",
                 "Category Name" => "$name",
-                "Actions"=>"<a class='btn btn-sm' href='$url'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'>
+                "Actions"=>"<a class='btn btn-sm' href='/admin/category/edit/".$id."'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'>
                 <path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'/>
                 <path fill-rule='evenodd' d='M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z'/>
                 </svg></a>
@@ -631,7 +630,14 @@ class adminController extends Controller
                 "id" => "$id",
                 "Sl. No." => "$loop_counter",
                 "subCategory Name" => "$name",
-
+                "Actions"=>"<a class='btn btn-sm' href='/admin/sub-category/edit/".$id."'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'>
+                <path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'/>
+                <path fill-rule='evenodd' d='M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z'/>
+                </svg></a>
+                <button class='btn btn-sm delete-btn-sub-category' value='$id'><svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-trash' viewBox='0 0 16 16'>
+                <path d='M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z'/>
+                <path fill-rule='evenodd' d='M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z'/>
+                </svg></button>"
             ];
 
             array_push($list_data, $list_data_temp);
@@ -641,7 +647,7 @@ class adminController extends Controller
             "id",
             "Sl. No.",
             "subCategory Name",
-
+            'Actions'
         ];
 
         $page_data = [
@@ -758,5 +764,53 @@ class adminController extends Controller
                 'user_id' => Auth::id(),
             ]);
         return redirect()->back();
+    }
+    public function editCategory($id)
+    {
+        $data =  DB::table("theme_cat")
+        ->select('*')->where('id',$id)
+        ->first();
+        return view('admin.update_category',compact('data'));
+    }
+    public function updateCategory(Request $request)
+    {
+        DB::table('theme_cat')
+            ->where('id', $request['id'])
+            ->update([
+                'name' => $request['name'],
+                'active' =>1
+            ]);
+        return back()->with('success','successfully updated');;
+    }
+    public function editSubCategory($id)
+    {
+       $category = DB::table("theme_cat")
+       ->select("id", "name")
+       ->get();
+
+       $subcategory = DB::table("theme_sub")
+       ->select("id", "name")->where('id',$id)
+       ->first();
+        return view('admin.update_sub_category',compact('category','subcategory','id'));
+    }
+    public function updateSubCategory(Request $request)
+    {
+        $request = $request->all();
+        DB::table('theme_sub')
+            ->where('id', $request['id'])
+            ->update([
+                'name' => $request['name'],
+                'cat_id' =>$request['category']
+            ]);
+        return back()->with('success','successfully updated');
+    }
+    public function deleteSubCategory(Request $request)
+    {
+        return DB::table('theme_sub')->delete($request->id);
+    }
+    public function deleteTemplate($id)
+    {
+         DB::table('template_info')->delete($id);
+         return back()->with('success','successfully deleted');
     }
 }
