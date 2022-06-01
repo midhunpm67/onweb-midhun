@@ -39,7 +39,7 @@
 						<div class="col-md-6">
 							<div class="padding-20">
 								<h5><b>Slug URL</b></h5>
-								<input type="text" class="form-control" maxlength="25" name="slug_url" id="slug_url" />
+								<input type="text" class="form-control" name="slug_url" id="slug_url" />
 							</div>
 						</div>
 						<div class="col-md-6">

@@ -34,15 +34,12 @@
 					<div class="checkbox primary"><input type="checkbox" id="rememberme"><label for="rememberme">Remember me</label></div>
 					<!-- /.checkbox -->
 				</div>
-				<!-- /.pull-left -->
-				<div class="pull-right"><a href="page-recoverpw.html" class="a-link"><i class="fa fa-unlock-alt"></i>Forgot password?</a></div>
-				<!-- /.pull-right -->
 			</div>
 			<!-- /.clearfix -->
 			<button type="submit" class="frm-submit">Login<i class="fa fa-arrow-circle-right"></i></button>
 
 			<!-- /.row -->
-			<a href="page-register.html" class="a-link"><i class="fa fa-key"></i>New to NinjaAdmin? Register.</a>
+			<a href="/register" class="a-link"><i class="fa fa-key"></i>New to NinjaAdmin? Register.</a>
 			<div class="frm-footer">NinjaAdmin © 2016.</div>
 			<!-- /.footer -->
 		</div>
